@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>Pure Pursuit Reactive Path Tracking for Nonholonomic Mobile Robots with a 2D Laser Scanner | FanHao的个人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+      <meta name="google-site-verification" content="XXX" />
+    
+
+    
+        <meta property="algolia:search" data-application-id="LIR34C9ON7" data-api-key="2a1c9c523789599befb2717320b33325" data-index-name="spiderman algolia">
+    
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    
+
+    
+    <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.3/dist/disqusjs.css">
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1.18.0.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            gitalk: {
+                enable: true,
+                clientID: "GitHub Application Client ID",
+                clientSecret: "GitHub Application Client Secret",
+                repo: "GitHub repo",
+                owner: "GitHub repo owner",
+                admin: ["GitHub repo owner and collaborators","GitHub repo owner and collaborators",],
+                distractionFreeMode: true // Facebook-like distraction free mode  // Facebook-like distraction free mode
+            },
+            
+            
+            valine: {
+                enable: true,
+                appId: "",
+                appKey: "",
+            },
+            
+            
+            disqusjs: {
+              enable: true,
+              shortname: "",
+              siteName: "",
+              api: "https://disqus.skk.moe/disqus/",
+              apikey: "",
+              nesting: "4",
+              nocomment: "这里冷冷清清的，一条评论都没有",
+              admin: "",
+              adminLabel: "",
+            },
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/one.jpg" alt="fanhao">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>FanHao的个人博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="">
+        <box-icon type='' name=''></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="">
+        <box-icon type='' name=''></box-icon>
+    </a>
+
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cknv9r9950003nts0c4fj4l8j" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Pure Pursuit Reactive Path Tracking for Nonholonomic Mobile Robots with a 2D Laser Scanner
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-04-12T17:02:30.000Z" itemprop="datePublished">2021-04-13</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/English-papers-thesis/" rel="tag">English papers thesis</a></li></ul>
+            </div>
+            
+
+            
+            <div class="article-busuanzi">
+                有 <span id="busuanzi_value_page_pv">N</span> 人看过
+            </div>
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <p><strong>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<font color="#00bfff" size="4">基于二维激光雷达的非完整性移动机器人的纯路径跟踪</font></strong></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">纯追踪路径跟踪方法由于其简单有效，已广泛应用于非完整地面车辆的计划导航。在这篇论文中，我们研究了这种技术在由感知环境特征隐含定义的路径反应跟踪中的应用。目标点是通过一个有效的解释范围内的数据通过机载二维激光扫描仪，以跟踪人，走廊和墙壁。此外，该公式允许机器人完成由不同类型的路段组合而成的路径。这些技术已经在室内环境中的跟踪移动机器人Auriga-α上得到了成功的测试。<span id="more"></span></font></p>
+<p><strong>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<font color="black" size="4">1、简介</font></strong></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">移动机器人路径可以定义为车辆在环境中必须遵循的路线。 它对于执行移动机器人任务很有用，并且从车辆的运动学和动态角度考虑也是可以接受的。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">路径跟踪由路径跟踪控制器执行。 它的目标是通过不断生成速度和转向命令来补偿跟踪误差，从而自动驱动移动机器人沿路径行驶。 这些主要包括车辆在距离和行驶方向上的偏差。 为此，采用反馈和前馈控制机制，并在控制作用力和控制误差之间进行权衡。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">一些地面车辆路径跟踪方法是基于非线性控制理论的，如<strong>预测控制</strong>或<strong>模糊控制</strong>。或者，当前车辆姿态和跟随路径之间的几何因素可以提供更简单的跟踪策略。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">一种广泛而有效的几何方法是纯追踪算法。它计算连接车辆当前位置和路径中目标点的圆周弧。在指定的向前看距离处选择该点，该距离是该弧的弦长。这种方法的优点包括预瞄距离的调整容易，计算简单，并且没有导数项。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">移动机器人的路径大致可分为显式路径和隐式路径。显式路径在全局框架中定义为由直线段或通过调整参数曲线连接的路径点坐标序列。在这种情况下，跟踪误差计算涉及到车辆相对于路径的姿态的实时估计。通常，这意味着处理来自各种传感器的信号（例如，GPS、里程计、距离或视觉），并将它们与环境的几何模型联系起来。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">另一方面，隐式路径由一组适当的传感器在环境中可感知的显著特征来描述。例如，一条道路确定了一条路径，该路径可以通过其左右边缘在图像中识别，并且一个人的路线可以在连续的范围扫描中被检测为点簇。因此，关于隐式路径的跟踪误差的计算不需要全局姿态估计。如果可以直接从传感器数据中检测到路径特征，则这种方法允许进行反应式处理。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"><strong>反应式导航</strong>的基本思想是只需要从传感器数据中提取特定路径的基本信息。这样，就可以在很大程度上简化处理复杂性。然而，要实现反应性还必须解决一些问题。首先，对传感器数据的依赖可能导致不稳定的响应。其次，非完整约束限制了从给定姿势开始的可能运动。第三，现有的移动机器人传感器能够提供大量需要及时处理的信息。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">许多特别的方法和传感器配置已经被设计出来，开发基本的机器人控制模块来实现高级功能。例如，一对超声波传感器允许估计墙壁跟踪控制的距离和方向。也有文献提出了一套异构的超声波测距传感器和基于规则的控制，用于跟踪温室通道。也有文献中对声纳回波进行了频率分析，以基于纹理检测路径边缘。一些纯反应性策略得益于激光扫描仪的精确性和可靠性，它使用了一个简化的距离环，该距离环通过丢弃大多数扫描角度而获得。或者，在Barawid Jr的文献中提出了二维激光扫描的霍夫变换来估计相对于树木线条的横向偏移和方向。另一方面，跟随移动物体（人或另一个机器人）的过程涉及目标检测以及车辆保持一定距离的运动控制器。在这种情况下，最简单的策略是控制速度，同时直线行驶在当前目标位置的方向。这是通过相机和激光扫描仪实现的。文《通过使用红外传感器对自主移动机器人进行模糊目标跟踪控制》提出的模糊控制器还考虑了目标姿态的变化，以跟踪另一个带有红外传感器的移动机器人。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">在本文中，我们提出了一种普遍适用的无功运动控制方法，该方法基于一种有效的路径跟踪方法，即纯追踪，并广泛应用于测距装置。该策略保证了非完整飞行器的转向容许性。此外，前视距离可以提供平稳的车辆响应。此外，本文还提出了一种简单的二维距离数据解释方法，可以有效地计算目标点。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">我们的方法的另一个优点是，可以使用基本的纯追踪策略作为一个公共框架来跟踪隐式或显式路径的任何组合，这在大规模环境中可能是有效的。特别地，我们研究了反应路径跟踪在跟踪人、墙和走廊中的应用。这一点已经在室内环境中用装有180°局部视野激光扫描仪的履带式移动机器人进行了测试。这种传感器因其体积小、可靠性高、采集速度快等优点，在许多野外移动机器人中得到了广泛的应用。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">论文的结构如下。第二节回顾了纯追踪方法在技术文献中的应用。在第三节中，我们从几何上推导了纯追踪策略，并详细介绍了它在显式和隐式课程追踪中的实现。第四节提出了应用纯追踪来跟踪墙壁，走廊，和人自主使用车载二维激光扫描仪。第五节介绍了移动机器人Auriga-α的实验结果。</font></p>
+<p><strong>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<font color="black" size="4">2、纯路径跟踪的文献综述</font></strong></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">纯路径跟踪的概念可以追溯到早期关于导弹追击目标的技术文献。在纯跟踪过程中，导弹速度矢量总是指向目标的瞬时位置。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">之后，在1985年，纯追踪策略首次出现在机器人领域，当时华莱士等人设计了一种计算维持车辆在道路上行驶所需转向的方法。这是通过保持道路在从车载摄像头获得的图像中心来实现的。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">基于这一思想，Amidi提出了纯追踪方法来跟踪显式路径。pure pursuit这个名字来源于将车辆视为在前方一段距离的道路上追逐一个点。在Coulter的工作中讨论了纯追踪算法的一些实现问题。从那时起，纯追踪策略已被用于许多显式路径跟踪应用，包括室内和室外导航。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">考虑到纯跟踪算法的稳定性条件。在这种情况下，墨菲研究了与沿直线道路行驶的视觉处理相关的时间延迟效应。此外，考虑到控制回路中的计算、通信和执行器延迟，分析了跟踪常曲率显式路径的稳定性。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">Ollero等人引入了纯追踪参数的监控，作为一种实时模糊控制器，它根据路径特征、速度和跟踪误差自动调整前视距离。提出了一种基于Rodr差分GPS数据的大型无人机高速（80km/h以上）行驶模糊监督纯跟踪控制器ı́卡斯塔岛ño等人。Martınez等人提出将曲率限制应用于纯追踪路径跟踪器，以避免牵引多个被动拖车的车辆发生单元间碰撞。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">由于Pure-Pursuit广泛使用，纯追踪已被视为其他路径跟踪策略的参考。 在一些文献中使用先前记录的显式路径的转向角和曲率的过去算法进行比较。关于使用2D激光扫描仪跟随人。Gockley等人，提出了反应电势场方法和应用于所记录的人的位置的纯追求之间的比较。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">此外，还对纯追踪算法进行了改进。有文献提出，通过在前方距离处创建虚拟目标点，解决了车辆远离路径的问题。也有文献提出，基本的纯追踪跟踪器增加了积分修正，以减少由于期望和实际转向角之间的差异而产生的系统跟踪误差。Stentz等人添加了一个与车辆和路径之间的航向误差成比例的术语。矢量追踪除了基于螺旋理论的位置外，还采用了目标点方向。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black">综上所述，纯粹追求是一种被许多作者分析过的广泛使用的技术。然而，自该方法首次被提出用于移动机器人以来，EURASIP杂志关于信号处理隐式路径进展的跟踪很少受到关注，除了我们早期使用旋转声纳和2D激光扫描仪跟踪人员的努力。此外，以前没有研究过这种方法结合不同类型的隐式和显式路径的可能性。</font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+<p>&ensp;&ensp;&ensp;&ensp;<font color="black"></font></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/2021/04/18/Automatic-Steering/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Automatic Steering Methods for Autonomous Automobile Path Tracking
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/13/Ribbon-path/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Ribbon model based path tracking method for autonomous ground vehicles</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=Pure Pursuit Reactive Path Tracking for Nonholonomic Mobile Robots with a 2D Laser Scanner - FanHao的个人博客&url=https://spiderman-spiderman.github.io/2021/04/13/Pure-Pursuit/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Pure Pursuit Reactive Path Tracking for Nonholonomic Mobile Robots with a 2D Laser Scanner - FanHao的个人博客&u=https://spiderman-spiderman.github.io/2021/04/13/Pure-Pursuit/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Pure Pursuit Reactive Path Tracking for Nonholonomic Mobile Robots with a 2D Laser Scanner - FanHao的个人博客&url=https://spiderman-spiderman.github.io/2021/04/13/Pure-Pursuit/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+<section class="comments comments-disqusjs">
+    <div id="disqus_thread"></div>
+</section>
+
+
+
+<section class="comments">
+    <div id="gitalk-container"></div>
+</section>
+
+
+
+<section class="comments">
+    <div id="valine-container"></div>
+</section>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+
+
+<div id="remark42"></div>
+<script>
+    (function() {
+        window.remark_config = {
+            host: "",
+            site_id: "",
+            max_shown_comments: "10",
+            theme: "light",
+            locale: "en",
+            show_email_subscription: "false",
+            components: ['embed']
+        }
+        var d = document, s = d.createElement('script');
+        s.src = remark_config.host + '/web/embed.js';
+        s.defer = true;
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+            
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-novels/" rel="tag">English novels</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-papers-thesis/" rel="tag">English papers thesis</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/18/Automatic-Steering/">Automatic Steering Methods for Autonomous Automobile Path Tracking</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/13/Pure-Pursuit/">Pure Pursuit Reactive Path Tracking for Nonholonomic Mobile Robots with a 2D Laser Scanner</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/13/Ribbon-path/">Ribbon model based path tracking method for autonomous ground vehicles</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/11/newpaper/">By Mark Twain</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">2021</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            FanHao的个人博客 &copy; 2021<br>
+            Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+        </div>
+    </div>
+
+</footer>
+
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+
+
+<script src="https://unpkg.com/disqusjs@1.3/dist/disqus.js"></script>
+
+
+
+<script src="/dist/build.js?1.18.0.js"></script>
+
+
+<script src="/dist/custom.js?1.18.0.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+<!-- Google Analytics-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-X"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-XXXXX-X');
+</script>
+
+
+
+
+
+</body>
+
+</html>
